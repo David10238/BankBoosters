@@ -6,13 +6,13 @@ on:
       - main
       - development
 
+defaults:
+  run:
+    working-directory: ./web-client
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: ./web-client
 
     strategy:
       matrix:
