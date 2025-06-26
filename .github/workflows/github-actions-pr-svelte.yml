@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./web-client
+
     strategy:
       matrix:
         node-version: [22.x]
@@ -20,18 +24,14 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          working-directory: ./web-client
           node-version: ${{ matrix.node-version }}
           cache: "npm"
 
       - name: npm install
-        working-directory: ./web-client
         run: npm ci
 
       - name: npm build
-        working-directory: ./web-client
         run: npm run build
 
       - name: npm lint
-        working-directory: ./web-client
         run: npm run lint
