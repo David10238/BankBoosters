@@ -21,7 +21,7 @@ func newHandler(endpoint Endpoint, middlewares []Middleware) handler {
 }
 
 func (h handler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
-	reader := &RequestReader{}
+	reader := newRequestReader(req)
 	for _, middleware := range h.middlewares {
 		if response := middleware(reader); response != nil {
 			if err := (*response).Write(&res); err != nil {

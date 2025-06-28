@@ -20,30 +20,30 @@ func (err MessageResponse) Write(w *http.ResponseWriter) error {
 	return returnErr
 }
 
-func SendCode(code int, message string) MessageResponse {
-	return MessageResponse{code, message}
+func SendCode(code int, message string) *MessageResponse {
+	return &MessageResponse{code, message}
 }
 
-func SendOk(message string) MessageResponse {
+func SendOk(message string) *MessageResponse {
 	return SendCode(http.StatusOK, message)
 }
 
-func SendInternalServerError() MessageResponse {
+func SendInternalServerError() *MessageResponse {
 	return SendCode(http.StatusInternalServerError, "Internal Server Error")
 }
 
-func SendBadRequest(message string) MessageResponse {
+func SendBadRequest(message string) *MessageResponse {
 	return SendCode(http.StatusBadRequest, message)
 }
 
-func SendUnauthorized(message string) MessageResponse {
+func SendUnauthorized(message string) *MessageResponse {
 	return SendCode(http.StatusUnauthorized, message)
 }
 
-func SendForbidden(message string) MessageResponse {
+func SendForbidden(message string) *MessageResponse {
 	return SendCode(http.StatusForbidden, message)
 }
 
-func SendNotFound(message string) MessageResponse {
+func SendNotFound(message string) *MessageResponse {
 	return SendCode(http.StatusNotFound, message)
 }

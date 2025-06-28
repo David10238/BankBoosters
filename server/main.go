@@ -11,6 +11,35 @@ func main() {
 		return api.SendOk("Hello world")
 	})
 
+	type Adder struct {
+		A int
+		B int
+	}
+
+	router.Post("/add", func(reader *api.RequestReader) api.ResponseWriter {
+		adder := Adder{}
+
+		if err := reader.BindJsonBody(&adder); err != nil {
+			return err
+		}
+
+		d := 0
+		if err := reader.BindJsonHeader("d", &d); err != nil {
+			return err
+		}
+
+		str := ""
+		if err := reader.BindStringHeader("hi", &str); err != nil {
+			return err
+		}
+
+		if str == "Hi" {
+			return api.SendJson("Hello world")
+		}
+
+		return api.SendJson(adder.A + adder.B + d)
+	})
+
 	group := router.RouteGroup("/group")
 
 	group.Get("/json", func(reader *api.RequestReader) api.ResponseWriter {
