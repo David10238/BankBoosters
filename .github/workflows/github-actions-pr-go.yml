@@ -9,7 +9,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./mobile_app
+    working-directory: ./server
 
 jobs:
   build:
