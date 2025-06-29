@@ -11,7 +11,7 @@ defaults:
     working-directory: ./web-client
 
 jobs:
-  build:
+  svelte_pr_check:
     runs-on: ubuntu-latest
 
     strategy:
