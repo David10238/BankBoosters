@@ -108,3 +108,16 @@ func Test_RouterNestingWithAndWithoutGroups(t *testing.T) {
 		t.Run(name, createTestCase(c.route, c.expected))
 	}
 }
+
+func Test_RouterReturnsNotFoundOnNonexistentRoute(t *testing.T) {
+	router := NewRouter("/api")
+
+	req := httptest.NewRequest("GET", "http://localhost:8080/thisIsNotAnEndpoint", nil)
+
+	w := httptest.NewRecorder()
+	router.mux.ServeHTTP(w, req)
+
+	resp := w.Result()
+
+	assert.Equal(t, http.StatusNotFound, resp.StatusCode)
+}
