@@ -98,6 +98,7 @@ func Test_RouterNestingWithAndWithoutGroups(t *testing.T) {
 
 			body, err := io.ReadAll(resp.Body)
 			assert.NoError(t, err)
+
 			assert.Equal(t, http.StatusOK, resp.StatusCode)
 			assert.Equal(t, expected, string(body))
 		}

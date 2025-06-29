@@ -16,6 +16,7 @@ func (err *MessageResponse) Error() string {
 
 func (err MessageResponse) Write(w *http.ResponseWriter) error {
 	(*w).WriteHeader(err.code)
+	(*w).Header().Set("Content-Type", "text/plain; charset=utf-8")
 	_, returnErr := (*w).Write([]byte(err.message))
 	return returnErr
 }
