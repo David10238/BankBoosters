@@ -20,7 +20,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  flutter_pr_check:
     runs-on: ubuntu-latest
 
     steps:
