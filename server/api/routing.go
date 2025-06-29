@@ -21,9 +21,16 @@ func NewRouter(path string) Router {
 	}
 }
 
-func (r *Router) Listen(port int) error {
-	log.Printf("Listening at localhost:%d", port)
-	return http.ListenAndServe(fmt.Sprintf(":%d", port), r.mux)
+func (r *Router) ListenAndServe(port int) error {
+	log.Printf("Listening at http://localhost:%d", port)
+	portString := fmt.Sprintf(":%d", port)
+	return http.ListenAndServe(portString, r.mux)
+}
+
+func (r *Router) ListenAndServeTLS(port int, certFile string, keyFile string) error {
+	log.Printf("Listening at https://localhost:%d", port)
+	portString := fmt.Sprintf(":%d", port)
+	return http.ListenAndServeTLS(portString, certFile, keyFile, r.mux)
 }
 
 func (r *Router) RouteGroup(path string) Router {
